@@ -2,11 +2,18 @@
 function validate_number($val, $min, $max){
 	return isset($val) && is_numeric($val) && ($val>=$min) && ($val<=$max);
 }
-
+ 
 function validate_timezone($timezone) {
 	return isset($timezone);
 }
 
+
+function validate_X($x)
+ if (isNumeric(x)) return true;
+    else {
+        createTip("значение не выбрано");
+        return false;
+}
 
 // Проверка на попадание в область круга
 function check_first_area($x, $y, $r){
@@ -35,7 +42,13 @@ $rcor = sprintf("%01.3f", $r);
 $ycor = sprintf("%01.3f", $y);
 $xcor = sprintf("%01.3f", $x);
 
-
+function validateX() {
+    if (isNumeric(x)) return true;
+    else {
+        createNotification("x не выбран");
+        return false;
+    }
+}
 if(validate_number($x,-5,3) && validate_number($y,-3,5) && validate_number($r,2,5) && validate_timezone($timezone)){
     $is_inside = check_first_area($x, $y, $r) || check_second_area($x, $y, $r) || check_third_area($x, $y, $r);
 	$hit = $is_inside ? "Hit": "Miss";
