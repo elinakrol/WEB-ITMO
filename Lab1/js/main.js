@@ -12,6 +12,13 @@ function isNumber(s){
   return !isNaN(n) && isFinite(n);
 }
 
+function validateX() {
+    if (isNumeric(x)) return true;
+    else {
+        createNotification("x не выбран");
+        return false;
+}
+
 //функция для генерации ошибок
 function generateTip(text, color) { 
     var tip = document.createElement('div');
