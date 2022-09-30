@@ -5,6 +5,7 @@ var form= document.querySelector('.validate_form');
 var validatedButton = document.querySelector('.button_send');
 var rCoordinate = document.querySelector(".r");
 var yCoordinate = document.querySelector(".y");
+var xNewCoordinates = document.querySelectorAll(".x");
 var xCoordinates = document.querySelectorAll(".x");
 
 function isNumber(s){
@@ -12,12 +13,6 @@ function isNumber(s){
   return !isNaN(n) && isFinite(n);
 }
 
-function validateX() {
-    if (isNumeric(x)) return true;
-    else {
-        createNotification("x не выбран");
-        return false;
-}
 
 //функция для генерации ошибок
 function generateTip(text, color) { 
@@ -75,7 +70,7 @@ function validateField(coordinate,min,max){
 
 // фунция для повторной проверки, что поля заполнены верно, чтобы передать их php скрипту
 function validateAll(){
-  xcheck = checkSelection(xCoordinates);
+  xcheck = ( checkSelection(xCoordinates) && validdateField(xNewCoordinates,-5 ,3));
   ycheck = validateField(yCoordinate,-3,5);
   rcheck = validateField(rCoordinate,2,5);
   return ( xcheck && ycheck  && rcheck);
