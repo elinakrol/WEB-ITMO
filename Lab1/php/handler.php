@@ -2,19 +2,11 @@
 function validate_number($val, $min, $max){
 	return isset($val) && is_numeric($val) && ($val>=$min) && ($val<=$max);
 }
- 
+
 function validate_timezone($timezone) {
 	return isset($timezone);
 }
 
-
-function validate_X($x) {
- if (isNumeric(x)) return true;
-    else {
-        createTip("значение не выбрано");
-        return false;
-    }
-}
 
 // Проверка на попадание в область круга
 function check_first_area($x, $y, $r){

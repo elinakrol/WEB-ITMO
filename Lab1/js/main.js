@@ -5,14 +5,12 @@ var form= document.querySelector('.validate_form');
 var validatedButton = document.querySelector('.button_send');
 var rCoordinate = document.querySelector(".r");
 var yCoordinate = document.querySelector(".y");
-var xNewCoordinates = document.querySelectorAll(".x");
 var xCoordinates = document.querySelectorAll(".x");
 
 function isNumber(s){
   var n = parseFloat(s.replace(',','.'));
   return !isNaN(n) && isFinite(n);
 }
-
 
 //функция для генерации ошибок
 function generateTip(text, color) { 
@@ -44,6 +42,22 @@ function checkSelection(radios) {
     radios[0].parentElement.insertBefore(error, radios[0]);
     return false;
 }
+function validatewrong (coordinate, min,max) {
+  if(coordinate.value){
+    if(coordinate.value<min || coordinate.value>max || !isNumber(coordinate.value)){
+
+      var error = generateTip('Field is blank','red');
+      coordinate.parentElement.insertBefore(error, coordinate);
+      return false;
+    }
+    else{
+      var correct = generateTip('Correct data','green');
+      coordinate.parentElement.insertBefore(correct, coordinate);
+      return true;
+    }
+  }
+  return false;
+}
 
 // проверка значения в поле на попадание в заданный диапазон
 function validateField(coordinate,min,max){
@@ -70,7 +84,8 @@ function validateField(coordinate,min,max){
 
 // фунция для повторной проверки, что поля заполнены верно, чтобы передать их php скрипту
 function validateAll(){
-  xcheck = ( checkSelection(xCoordinates) && validdateField(xNewCoordinates,-5 ,3));
+  xcheck = checkSelection(xCoordinates);
+  xcorcheck= validatewrong(xCoordinates,-3,5)
   ycheck = validateField(yCoordinate,-3,5);
   rcheck = validateField(rCoordinate,2,5);
   return ( xcheck && ycheck  && rcheck);
